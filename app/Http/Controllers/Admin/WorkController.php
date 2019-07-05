@@ -63,19 +63,35 @@ class WorkController extends Controller
      */
     public function store(WorkStoreRequest $request)
     {
-        // Cambios
-        $students = Student::orderBy('id','ASC')->get();
-        $academics = Academic::orderBy('id','ASC')->get();
-        $types = Type::orderBy('id','ASC')->get();
+        /*
+        //dd($request->all()); //ver #request , #studtens es un array que contiene la id de cada studiante seleccionado, lo mismo para academics
+        $title = $request->title;
+        //$status = 'INGRESADA';
+        $start_date = $request->start_date;
+        $finish_date =$request->finish_date;
+        $name_ext_org=$request->name_ext_org;
+        $tutor_ext_org=$request->tutor_ext_org;
+        //$cant_students =count($request->students->get('array'));
+        $cant_students = 1;
+        $type_id = (int) $request->type_id;
+//dd($type_id);
 
-        //Fin Cambios
-
+        $work = Work::create(['title'=>$title,
+        'start_date'=>$start_date,
+        'finish_date'=>$finish_date,
+        'name_ext_org'=>$name_ext_org,
+        'tutor_ext_org'=>$tutor_ext_org,
+        'cant_students'=>$cant_students,
+        'type_id'=>2]);
+        */
         $work = Work::create($request->all());
-        // Mas cambios
-        dd($work);
-        $type = Type::find($work->id_type);
-        //Mas cambios
-        return  redirect()->route('works.index',$work->id)->with('info','Actividad de titulación creada correctamente');
+        //$work->type_id()->associate($type_id);
+        //$work->students()->attach($request->get('students'));
+        //$work->academics()->attach($request->get('academics'));
+
+        return redirect()->route('works.index',$work->id)->with('info','ACTIVIDAD DE TITULACIÓN CREADA CON EXITO');
+
+        //return '';
     }
 
     /**
