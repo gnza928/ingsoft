@@ -64,7 +64,7 @@ class WorkController extends Controller
     public function store(WorkStoreRequest $request)
     {
 
-
+        //dd($request);
         $title = $request->title;
         $status = 'INGRESADA';
         $start_date=$request->start_date;
@@ -113,7 +113,7 @@ class WorkController extends Controller
         if(sizeof($students)==0){
             return redirect()->route('works.create')->with('info','¡ Debe seleccionar al menos 1 estudiante !');
         }
-
+        //dd($students);
         if(sizeof($academics)==0){
             return redirect()->route('works.create')->with('info','¡ Debe seleccionar al menos 1 academico como profesor guia !');
         }
@@ -169,7 +169,9 @@ class WorkController extends Controller
         $students = Student::orderBy('id','ASC')->get();
         $academics = Academic::orderBy('id','ASC')->get();
         $types = Type::orderBy('id','ASC')->get();
-        return view('admin.works.edit',compact('work','types','students','academics','works'));
+        $type = Type::find($work->type_id);
+
+        return view('admin.works.edit',compact('work','type','types','students','academics','works'));
     }
 
     /**

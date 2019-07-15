@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StudentStoreRequest extends FormRequest
+class AcademicUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,25 +25,19 @@ class StudentStoreRequest extends FormRequest
     {
         return
         [
-            'rut'=>'required|unique:students',
+            'rut'=>'required:academics,rut,cl_rut'.$this->academic,
             'name'=>'required',
-            'email'=>'required|unique:students,email',
-            'phone'=>'nullable',
-            'career'=>'required',
-            'work_id'=>'nullable'];
-
-
+            'email'=>'required',
+        ];
+            
+        
     }
 
     public function messages(){
         return [
-
-            'rut.unique' => 'Ya existe el rut ingresado.',
-            'career.required'=>'El campo Carrera no puede estar vacío',
-            'name.required' => 'El campo Nombre no puede estar vacío',
+            'name.required' => 'El campo nombre no puede estar vacío',
             'rut.required' => 'El campo RUT no puede estar vacío',
             'email.required' => 'El campo E-mail no puede estar vacío',
-            'email.unique' => 'El E-mail ya existe',
         ];
     }
 }
